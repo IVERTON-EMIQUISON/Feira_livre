@@ -19,7 +19,7 @@ class FrutasViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
         for fruta in self.queryset:
-            fruta.qntdDspnvl -= 1
+            fruta.quantidade_disponivel -= 1 
             fruta.save()
         return response
 
@@ -30,7 +30,7 @@ class EntregaViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         for entrega in self.queryset:
-            entrega_info = {'nome_cliente': entrega.nmClnt, 'endereco': entrega.endrNtrg}
+            entrega_info = {'nome_cliente': entrega.nome_cliente, 'endereco': entrega.endereco_entrega}
             response.data.append(entrega_info)
         return response
 
